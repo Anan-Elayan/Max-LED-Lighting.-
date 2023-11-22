@@ -29,24 +29,15 @@ import java.util.LinkedList;
 
 */
 
-
-
-
-
 public class Data {
-    //this variable save the result 'LCS'
-    String stringResult = "";
-
-    public Data() {
-    }
 
     /**
-     * in this method find the LCS ( build tables signals and numbers 'Algorithm') ,And take size of power and text Area to print the reuslt
+     * in this method find the LCS ( build tables signals and numbers 'Algorithm') ,And take size of power and text Area to print the result
      */
     public void findMaxLedLighting(int powerSize, TextArea textAreaResult, TextArea textAreaMoreDetails) {
         // in this array to store led and power #row = #power(spinner) , #column = #spoer(spinner)
         int[][] costLCS = new int[powerSize + 1][powerSize + 1];      //size --> spinner
-        // to store Signs like " ? , <-- , ^ "
+        // to store Signals like " ? , <-- , ^ "
         String[][] signalArray = new String[powerSize + 1][powerSize + 1];
 
         for (int i = 1; i <= powerSize; i++)
@@ -93,6 +84,7 @@ public class Data {
      */
     public void displayResult(String[][] signalArray, int i, int j, int[][] findMaxLedLighting, TextArea textAreaResult) {
 
+        //to do font in textArea is bold
         textAreaResult.setStyle("-fx-font-weight: bold");
 
         // Initializes an integer variable (row) with the value of the parameter i.
@@ -101,7 +93,7 @@ public class Data {
         // Initializes an integer variable (column) with the value of the parameter j.
         int column = j;
 
-        // Creates a linked list of strings (allLCS) to store unique LCS (Longest Common Subsequence) pairs.
+        // Creates a linked list of strings (findMaxLedLighting) to store unique LCS (Longest Common Subsequence) pairs.
         LinkedList<String> allLCS = new LinkedList<>();
 
         // Enters a while loop as long as the findMaxLedLighting at the current row and column is equal to the findMaxLedLighting at i and j.
@@ -168,6 +160,7 @@ public class Data {
      * and a TextArea object (textAreaMoreDetails).to print two table signals + numbers
      */
     public void displayDetailsTable(int size, String[][] signalArray, int[][] findMaxLedLighting, TextArea textAreaMoreDetails) {
+
         // to print first table (numbers)
         textAreaMoreDetails.setStyle("-fx-font-weight: bold");
         textAreaMoreDetails.appendText("\t");

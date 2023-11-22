@@ -10,7 +10,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -51,7 +50,7 @@ public class MainView extends AnchorPane {
     private final TextArea textAreaDetails;
     private final ImageView imageViewLED;
     private final TextArea rightTextArea;
-    //private final  TextArea rightTextArea;
+
     // declaration selected file
     FileChooser fileChooser = new FileChooser();
     private final Label lblSource;
@@ -200,6 +199,7 @@ public class MainView extends AnchorPane {
             styleBtnMoreDetails();
         });
 
+        //basic right pane to print power+led
         Pane rightPane  = new Pane();
         rightPane.setStyle("-fx-background-color:  transparent  ;  -fx-border-radius: 10px 0px 0px 30px  ; -fx-background-radius: 10px  0px 0px 30px");
         rightPane.setLayoutX(545);
@@ -215,7 +215,7 @@ public class MainView extends AnchorPane {
         rightPane.setEffect(dropShadowRightPane);
 
 
-
+        // to print power + led
         rightTextArea = new TextArea();
         rightTextArea.setLayoutX(6);
         rightTextArea.setLayoutY(0);
@@ -252,6 +252,10 @@ public class MainView extends AnchorPane {
         // add center pane and left pane to the base pane screen
         getChildren().addAll(centerPane, leftPane);
     }
+
+
+
+
 
 
     /**
@@ -317,7 +321,7 @@ public class MainView extends AnchorPane {
 
         /**
          in this action if user selected type input.
-         and two action button add and showResult (as Manual ---------------------------------------------------)
+         and two action button add and showResult (as Manual -----------------------------------------------------------------------------------------------------)
          */
         radioButtonManualInput.setOnAction(e2 -> {
             // deleted previous all data in LED Array
@@ -431,7 +435,7 @@ public class MainView extends AnchorPane {
 
         /**
          in this action if user selected type input.
-         and two action button add and showResult and prows button select File ( as a File *************************************** )
+         and two action button add and showResult and prows button select File ( as a File ************************************************************************ )
          */
         radioButtonFromFile.setOnAction(e -> {
             // deleted previous all data in LED Array
@@ -502,14 +506,16 @@ public class MainView extends AnchorPane {
                                             if (LED == null || index >= LED.length) {
                                                 LED = new int[powerSize];
                                             }
-
+                                            // leads
                                             int value = Integer.parseInt(data[index]);
-
+                                            // not negative
                                             if (value >= 0) {
+                                                // no cell zero in array lLED
                                                 if (!repetedNumber(LED, Integer.parseInt(data[index]))) {
                                                     // add element to the array LED
                                                     LED[index] = Integer.parseInt(data[index]);
                                                     textAreaDetails.clear();
+                                                    //to print right side
                                                     String PowerAndLed = "Power: "+ (index+1) + " Led : " +data[index] ;
                                                     Label label = new Label("⚡");
                                                     label.setStyle("-fx-text-fill: yellow;-fx-font-weight: blod;-fx-font-size: 50px");
@@ -520,12 +526,14 @@ public class MainView extends AnchorPane {
                                                         rightTextArea.appendText("   " + PowerAndLed+ "\n");
                                                     }
 
-                                                } else {
+                                                }
+                                                // two number as the same
+                                                else {
                                                     new Warning("LED " + data[index] + " already Exit.\n");
                                                     return;
                                                 }
                                             }
-
+                                            // there exit number value of led is negative
                                             else {
                                                 new Warning("there exit negative value" + value + " in this file.\n");
                                                 return;
@@ -540,21 +548,22 @@ public class MainView extends AnchorPane {
                                         }
                                     }
 
-                                }catch (NoSuchElementException elementException){
+                                }
+                                // no input leads in file (second line in file is empty)
+                                catch (NoSuchElementException elementException){
                                     new Warning("There are no input lights !!\n");
                                     return;
                                 }
+                                // if number of power not equal number of leads input
                                 if(getSize(LED)==false){
                                     new Warning("Please check number of Led's");
                                     return;
                                 }
-
-
                                 // all data from file is true
                                 new Warning("All lights have been added successfully.\n");
                             }
                         }
-                        // if data in file string
+                        // if data in file string (not numbers)
                         catch (InputMismatchException f) {
                             new Warning("The information inside the file is incorrect.\n");
                         }
@@ -577,6 +586,8 @@ public class MainView extends AnchorPane {
                 }
                 // call method from Data class
                 else {
+
+                    // if no cell in array LED not equal zero
                     if (isZeroValueFromLED(LED)) {
                         new Warning("You can see the result now.\n");
                         leftBtnResult.setDisable(false);
@@ -584,7 +595,9 @@ public class MainView extends AnchorPane {
                         textAreaResult.clear();
                         textAreaDetails.clear();
                         data.findMaxLedLighting(powerSize, textAreaResult, textAreaDetails);
-                    } else {
+                    }
+                    // there exit cell in array LED is zero ( no value of led)
+                    else {
                         new Warning("Please check the data again.\n");
                     }
 
@@ -594,12 +607,19 @@ public class MainView extends AnchorPane {
     }
 
 
+
+
+
     /**
      * for this method handel view the left button result
      */
     public void styleBtnResult() {
-        textAreaDetails.setVisible(false);
+        textAreaResult.setPrefHeight(372);
+        textAreaResult.setPrefWidth(465);
+        textAreaResult.setLayoutX(54);
+        textAreaResult.setLayoutY(20);
         textAreaResult.setVisible(true);
+        textAreaDetails.setVisible(false);
         lblLED.setVisible(false);
         lblSource.setVisible(false);
         radioButtonFromFile.setVisible(false);
@@ -609,11 +629,7 @@ public class MainView extends AnchorPane {
         spinnerSource.setVisible(false);
         txtFieldLED.setVisible(false);
         btnConnect.setVisible(false);
-        textAreaResult.setPrefHeight(372);
-        textAreaResult.setPrefWidth(465);
-        textAreaResult.setLayoutX(54);
-        textAreaResult.setLayoutY(20);
-        textAreaResult.setVisible(true);
+
     }
 
 
@@ -621,6 +637,10 @@ public class MainView extends AnchorPane {
      * for this method handel view the left button More Details
      */
     public void styleBtnMoreDetails() {
+        textAreaDetails.setPrefHeight(372);
+        textAreaDetails.setPrefWidth(465);
+        textAreaDetails.setLayoutX(54);
+        textAreaDetails.setLayoutY(20);
         textAreaDetails.setVisible(true);
         textAreaResult.setVisible(false);
         lblLED.setVisible(false);
@@ -632,12 +652,13 @@ public class MainView extends AnchorPane {
         spinnerSource.setVisible(false);
         txtFieldLED.setVisible(false);
         btnConnect.setVisible(false);
-        textAreaDetails.setPrefHeight(372);
-        textAreaDetails.setPrefWidth(465);
-        textAreaDetails.setLayoutX(54);
-        textAreaDetails.setLayoutY(20);
-        textAreaDetails.setVisible(true);
+
     }
+
+
+
+
+
 
 
     /**
@@ -652,6 +673,8 @@ public class MainView extends AnchorPane {
         return false;
     }
 
+    /**
+     * in this method to check if exit cell in array led is zero ( no LED) */
     private static boolean isZeroValueFromLED(int[] LED) {
         for (int i = 0; i < LED.length; i++) {
             if (LED[i] == 0) {
@@ -661,6 +684,8 @@ public class MainView extends AnchorPane {
         return true;
     }
 
+    /**
+     * in this methode to return size array of LED*/
     private static boolean getSize(int[] LED) {
         for (int i = 0; i < LED.length; i++) {
             if (LED[i] == 0) {
