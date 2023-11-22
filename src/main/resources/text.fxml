@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="402.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test">
+   <children>
+      <Pane layoutX="131.0" prefHeight="402.0" prefWidth="528.0" style="-fx-background-color: White;">
+         <children>
+            <ImageView fitHeight="402.0" fitWidth="528.0" layoutX="7.0" pickOnBounds="true">
+               <image>
+                  <Image url="@images/background_image.jpg" />
+               </image></ImageView>
+            <RadioButton layoutX="151.0" layoutY="41.0" mnemonicParsing="false" style="-fx-cursor: red;" styleClass="custom-radio-button" stylesheets="@style.css" text="RadioButton" textFill="WHITE" />
+            <RadioButton layoutX="347.0" layoutY="41.0" mnemonicParsing="false" style="-fx-cursor: red;" styleClass="custom-radio-button" stylesheets="@style.css" text="RadioButton" textFill="WHITE" />
+            <Spinner layoutX="117.0" layoutY="126.0" prefHeight="25.0" prefWidth="333.0" />
+            <TextField layoutX="125.0" layoutY="201.0" prefHeight="25.0" prefWidth="333.0" promptText="LED" />
+            <Label layoutX="73.0" layoutY="130.0" text="Label" textFill="#f5f5f5" />
+            <Label layoutX="80.0" layoutY="205.0" text="Label" textFill="#fcfcfc" />
+            <Button layoutX="245.0" layoutY="235.0" mnemonicParsing="false" text="Button" />
+            <Button layoutX="245.0" layoutY="324.0" mnemonicParsing="false" text="Button" />
+         </children>
+      </Pane>
+      <Pane prefHeight="402.0" prefWidth="162.0" style="-fx-background-color: black; -fx-border-color: #f5c843; -fx-border-radius: 0px  10px 30px 0px; -fx-background-radius: 0px  10px 30px 0px;" styleClass="shadow2" stylesheets="@style.css">
+         <children>
+            <Button layoutX="23.0" layoutY="76.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: transpernt; -fx-border-color: #f5c843; -fx-border-width: 0 0  2 0; -fx-font-weight: bold;" text="Enter Data" textFill="#f7f7f7" />
+            <Button layoutX="23.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: transpernt; -fx-border-width: 0 0 2 0; -fx-border-color: #f5c843; -fx-font-weight: bold;" text="Result" textFill="WHITE" />
+            <Button layoutX="24.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: transpernt; -fx-border-width: 0 0 2 0; -fx-font-weight: bold; -fx-border-color: #f5c843;" text="More Details" textFill="WHITE" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
