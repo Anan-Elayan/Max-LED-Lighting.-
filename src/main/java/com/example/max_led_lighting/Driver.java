@@ -27,10 +27,10 @@ public class Driver extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         mainView = new MainView();
-        Scene scene = new Scene(mainView , 900,415);
+        Scene scene = new Scene(mainView , 785,415);
         stage.setScene(scene);
         stage.setTitle("Max LED Lighting");
-        //stage.setResizable(false);
+        stage.setResizable(false);
         stage.getIcons().add(new Image("images/iconApp.jpg"));
         stage.show();
     }

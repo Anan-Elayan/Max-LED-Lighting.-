@@ -2,13 +2,14 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane prefHeight="402.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test">
    <children>
@@ -18,14 +19,18 @@
                <image>
                   <Image url="@images/background_image.jpg" />
                </image></ImageView>
-            <RadioButton layoutX="151.0" layoutY="41.0" mnemonicParsing="false" style="-fx-cursor: red;" styleClass="custom-radio-button" stylesheets="@style.css" text="RadioButton" textFill="WHITE" />
-            <RadioButton layoutX="347.0" layoutY="41.0" mnemonicParsing="false" style="-fx-cursor: red;" styleClass="custom-radio-button" stylesheets="@style.css" text="RadioButton" textFill="WHITE" />
-            <Spinner layoutX="117.0" layoutY="126.0" prefHeight="25.0" prefWidth="333.0" />
-            <TextField layoutX="125.0" layoutY="201.0" prefHeight="25.0" prefWidth="333.0" promptText="LED" />
-            <Label layoutX="73.0" layoutY="130.0" text="Label" textFill="#f5f5f5" />
-            <Label layoutX="80.0" layoutY="205.0" text="Label" textFill="#fcfcfc" />
-            <Button layoutX="245.0" layoutY="235.0" mnemonicParsing="false" text="Button" />
-            <Button layoutX="245.0" layoutY="324.0" mnemonicParsing="false" text="Button" />
+            <ScrollPane layoutX="51.0" layoutY="10.0" prefHeight="367.0" prefWidth="461.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="452.0">
+                     <children>
+                        <Circle fill="#ffea00" layoutX="49.0" layoutY="71.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Line endX="57.00001525878906" endY="-84.18617248535156" layoutX="186.0" layoutY="155.0" startX="-124.99998474121094" startY="-84.00001525878906" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="37.0" layoutX="244.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="86.0" />
+                        <Label layoutX="250.0" layoutY="51.0" text="power 1" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
          </children>
       </Pane>
       <Pane prefHeight="402.0" prefWidth="162.0" style="-fx-background-color: black; -fx-border-color: #f5c843; -fx-border-radius: 0px  10px 30px 0px; -fx-background-radius: 0px  10px 30px 0px;" styleClass="shadow2" stylesheets="@style.css">
