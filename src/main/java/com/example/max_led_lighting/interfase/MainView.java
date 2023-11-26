@@ -235,6 +235,7 @@ public class MainView extends AnchorPane {
 
         // action when clicked on radioButton manual input
         radioButtonManualInput.setOnAction(e2 -> {
+            count=0;
             //The elements that appear and the elements that disappear
             LED = null;
             scrollPane.setContent(null);
@@ -424,6 +425,7 @@ public class MainView extends AnchorPane {
 
         // action when clicked on radioButton from file input
         radioButtonFromFile.setOnAction(e -> {
+            count=0;
             //The elements that appear and the elements that disappear
             LED = null;
             rightTextArea.clear();
