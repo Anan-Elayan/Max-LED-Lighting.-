@@ -25,31 +25,29 @@ import java.util.*;
 /**
  * Name: Anan Elayan
  * ID: 1211529
- *
- *    ♦ Aim Class:
- *             1) This JavaFX class, named MainView, represents the graphical user interface (GUI) for an LED lighting application.
- *    ♦ Variables:
- *             1) GUI components: Various JavaFX UI elements such as buttons, labels, text areas, etc.
- *             2) file: Represents the file selected by the user.
- *             3) data: An instance of the Data class, responsible for handling data-related operations.
- *             4) index, size: Variables related to the LED array.
- *             5) LED: An array to store LED data.
- *             6) count: Refers to the table that prints, whether the result, the figure, or the table.
- *
- *    ♦ Methods:
- *             1) drawLayout(): To draw an approximate diagram of the algorithm.
- *             2) repeatedNumber(): to check if the input number already exit in array LED's.
- *             3) isZeroValueFromLED(): in this method to check if exit cell in array led is zero ( no LED).
- *             4) getSize(): in this methode to return size array of LED
- *
- *   ♦ Initialization:
- *             1) The constructor initializes the GUI components, sets up event handlers, and adds components to the scene.
- *             2) GUI components are organized into panes (leftPane and centerPane).
- *             3) Toggle buttons and file-related components are included for manual and file input.
- *             4) Styling and positioning of components are set in the constructor and methods.
- *
-
- * */
+ * <p>
+ * ♦ Aim Class:
+ * 1) This JavaFX class, named MainView, represents the graphical user interface (GUI) for an LED lighting application.
+ * ♦ Variables:
+ * 1) GUI components: Various JavaFX UI elements such as buttons, labels, text areas, etc.
+ * 2) file: Represents the file selected by the user.
+ * 3) data: An instance of the Data class, responsible for handling data-related operations.
+ * 4) index, size: Variables related to the LED array.
+ * 5) LED: An array to store LED data.
+ * 6) count: Refers to the table that prints, whether the result, the figure, or the table.
+ * <p>
+ * ♦ Methods:
+ * 1) drawLayout(): To draw an approximate diagram of the algorithm.
+ * 2) repeatedNumber(): to check if the input number already exit in array LED's.
+ * 3) isZeroValueFromLED(): in this method to check if exit cell in array led is zero ( no LED).
+ * 4) getSize(): in this methode to return size array of LED
+ * <p>
+ * ♦ Initialization:
+ * 1) The constructor initializes the GUI components, sets up event handlers, and adds components to the scene.
+ * 2) GUI components are organized into panes (leftPane and centerPane).
+ * 3) Toggle buttons and file-related components are included for manual and file input.
+ * 4) Styling and positioning of components are set in the constructor and methods.
+ */
 
 
 public class MainView extends AnchorPane {
@@ -65,6 +63,7 @@ public class MainView extends AnchorPane {
     private final Spinner<Integer> spinnerSource;
     private final RadioButton radioButtonFromFile;
     private final RadioButton radioButtonManualInput;
+    private final RadioButton radioButtonRandom;
     private final TextField txtFieldLED;
     private final TextField txtFieldPath;
     private final CustomButton btnShowResult;
@@ -79,13 +78,10 @@ public class MainView extends AnchorPane {
     // indicates the first table ( result table ) and so on...
     int count = 1;
 
-    // size = size Source {First array } , index indicate the LED
+    // powerSize = powerSize Source {First array } , index indicate the LED
     int index, powerSize = 0;
     // declaration array of Lead [ To save inside the array ]
     public static int[] LED;
-
-
-
 
 
     public MainView() {
@@ -110,9 +106,14 @@ public class MainView extends AnchorPane {
         Font fontRadioButtonFromFile = Font.font(String.valueOf(FontPosture.REGULAR), FontWeight.BOLD, 15);
         radioButtonFromFile.setFont(fontRadioButtonFromFile);
 
+        radioButtonRandom = new RadioButton("Random Input");
+        Font fontRadioButtonRandom = Font.font(String.valueOf(FontPosture.REGULAR), FontWeight.BOLD, 15);
+        radioButtonRandom.setFont(fontRadioButtonRandom);
+
         ToggleGroup group = new ToggleGroup();
         radioButtonFromFile.setToggleGroup(group);
         radioButtonManualInput.setToggleGroup(group);
+        radioButtonRandom.setToggleGroup(group);
 
         lblSource = new Label("# Source");
         Font fontLblSource = Font.font(String.valueOf(FontPosture.REGULAR), FontWeight.BOLD, 15);
@@ -132,7 +133,9 @@ public class MainView extends AnchorPane {
         CustomButton btnNext = new CustomButton("NEXT");
         CustomButton btnPrivies = new CustomButton("PRIVIES");
         textAreaResult = new TextArea();
+        textAreaResult.setStyle("-fx-font-weight: bold");
         textAreaDetails = new TextArea();
+        textAreaDetails.setStyle("-fx-font-weight: bold");
         scrollPane = new ScrollPane();
         SpinnerValueFactory<Integer> spinnerValueFactorySource = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000);
         spinnerSource.setValueFactory(spinnerValueFactorySource);
@@ -160,7 +163,7 @@ public class MainView extends AnchorPane {
         rightTextArea.setPrefWidth(223);
         rightTextArea.setPrefHeight(415);
         rightTextArea.setEditable(false);
-        rightTextArea.setStyle("-fx-control-inner-background: black; -fx-border-color: #f5c843;-fx-font-size: 13px;-fx-font-weight: bold");
+        rightTextArea.setStyle("-fx-control-inner-background: black;-fx-border-color: #f5c843; -fx-font-size: 13px;-fx-font-weight: bold");
         DropShadow dropShadowLeftPane = new DropShadow();
         dropShadowLeftPane.setColor(javafx.scene.paint.Color.web("#f5c843"));
         dropShadowLeftPane.setWidth(-13.0);
@@ -178,6 +181,7 @@ public class MainView extends AnchorPane {
         // What appears when you first see the components.
         radioButtonFromFile.setVisible(true);
         radioButtonManualInput.setVisible(true);
+        radioButtonRandom.setVisible(true);
         txtFieldPath.setVisible(false);
         btnSelectFile.setVisible(false);
         textAreaResult.setVisible(false);
@@ -196,12 +200,16 @@ public class MainView extends AnchorPane {
 
         // position components on the screen
         radioButtonManualInput.setStyle("-fx-text-fill: white");
-        radioButtonManualInput.setLayoutX(138);
+        radioButtonManualInput.setLayoutX(50);
         radioButtonManualInput.setLayoutY(41);
 
         radioButtonFromFile.setStyle("-fx-text-fill: white");
-        radioButtonFromFile.setLayoutX(365);
+        radioButtonFromFile.setLayoutX(410);
         radioButtonFromFile.setLayoutY(41);
+
+        radioButtonRandom.setStyle("-fx-text-fill: white");
+        radioButtonRandom.setLayoutX(230);
+        radioButtonRandom.setLayoutY(41);
 
         lblSource.setStyle("-fx-text-fill: white");
         lblSource.setLayoutX(66);
@@ -230,14 +238,19 @@ public class MainView extends AnchorPane {
         btnConnect.setLayoutX(480);
         btnConnect.setLayoutY(227);
 
+        textAreaResult.setPrefWidth(475);
+        textAreaDetails.setPrefWidth(475);
+        scrollPane.setPrefWidth(475);
+
         //*******************************************************************       RadioButton         **********************************************************************************
 
 
         // action when clicked on radioButton manual input
         radioButtonManualInput.setOnAction(e2 -> {
-            count=0;
+            count = 0;
             //The elements that appear and the elements that disappear
             LED = null;
+            btnConnect.setDisable(false);
             scrollPane.setContent(null);
             rightTextArea.clear();
             textAreaDetails.clear();
@@ -263,7 +276,7 @@ public class MainView extends AnchorPane {
             // and the size number leads equal number of power set button connect Disable when fill the array.
             btnConnect.setOnAction(e -> {
                 // array of led is not empty their exit numbers
-                if(LED!=null){
+                if (LED != null) {
                     spinnerSource.setDisable(true);
                 }
                 // value from text file of led
@@ -272,7 +285,7 @@ public class MainView extends AnchorPane {
                 if (!valueOfLed.isEmpty()) {
                     // number format exception
                     try {
-                        // data in text field LED as a number
+                        // data in text field LED as a number(integer)
                         int leadValue = Integer.parseInt(valueOfLed);
                         // if input data is Negative
                         if (leadValue <= 0) {
@@ -286,7 +299,7 @@ public class MainView extends AnchorPane {
                         }
 
                         // if array is empty and number input data in textFiled grater than OR equal size power
-                        if (LED == null || index >= LED.length) {
+                        if (LED == null) {
                             powerSize = spinnerSource.getValue();
                             // size the array LED = value from spinner
                             LED = new int[powerSize];
@@ -314,7 +327,8 @@ public class MainView extends AnchorPane {
                                 }
                             }
                         }
-                        // # input data in textFiled leads = size power (spinner). and button add set Disable. array LED is full
+                        // # input data in textFiled leads = size power (spinner).
+                        // and button add set Disable. array LED is full
                         if (index >= LED.length) {
                             btnConnect.setDisable(true);
                             new Warning("All lights have been added successfully.\n");
@@ -338,6 +352,11 @@ public class MainView extends AnchorPane {
                 // if array of leads is empty ( no input leads) and call method from Data class
                 if (LED == null || LED.length == 0) {
                     new Warning("There are no input lights !!\n");
+                }
+                // if number of input leads not equal #power
+                else if(index!=spinnerValueFactorySource.getValue()){
+                    new Warning("Please fill the number of LED's ");
+                    return;
                 }
                 // call method from Data class
                 else {
@@ -373,6 +392,8 @@ public class MainView extends AnchorPane {
                             textAreaDetails.setLayoutY(90);
                             textAreaDetails.setLayoutX(50);
                             textAreaDetails.setPrefHeight(280);
+                            btnNext.setDisable(false);
+                            btnPrivies.setDisable(false);
                         }
                         // draw
                         else if (count == 3) {
@@ -382,7 +403,9 @@ public class MainView extends AnchorPane {
                             scrollPane.setLayoutY(90);
                             scrollPane.setLayoutX(50);
                             scrollPane.setPrefHeight(280);
-                            scrollPane.setPrefWidth(465);
+                            scrollPane.setPrefWidth(475);
+                            btnNext.setDisable(true);
+                            btnPrivies.setDisable(false);
                         }
                     });
                     // action button next to iterate the number of text Filed
@@ -395,6 +418,8 @@ public class MainView extends AnchorPane {
                             textAreaDetails.setLayoutY(90);
                             textAreaDetails.setLayoutX(50);
                             textAreaDetails.setPrefHeight(280);
+                            btnNext.setDisable(false);
+
                         }
                         // text filed result
                         else if (count == 1) {
@@ -404,6 +429,8 @@ public class MainView extends AnchorPane {
                             textAreaResult.setLayoutY(90);
                             textAreaResult.setLayoutX(50);
                             textAreaResult.setPrefHeight(280);
+                            btnNext.setDisable(false);
+                            btnPrivies.setDisable(true);
                         }
                     });
                     // if no cell in array LED not equal zero (if number of Led  less than number of power and call method to do algorithm and print the result)
@@ -413,23 +440,192 @@ public class MainView extends AnchorPane {
                         ArrayList<Integer> result = data.mainFunction(LED, textAreaResult, textAreaDetails);
                         scrollPane.setContent(drawLayout(result));
 
-                    }
-                    else {
+                    } else {
                         new Warning("Some information is wrong");
+                        return;
                     }
                 }
             });
 
         });
 
+        radioButtonRandom.setOnAction(r -> {
+            count = 0;
+            //The elements that appear and the elements that disappear
+            LED = null;
+            btnConnect.setDisable(false);
+            scrollPane.setContent(null);
+            rightTextArea.clear();
+            textAreaDetails.clear();
+            textAreaResult.clear();
+            txtFieldPath.setVisible(false);
+            btnSelectFile.setVisible(false);
+            btnPrivies.setVisible(false);
+            btnNext.setVisible(false);
+            textAreaResult.setVisible(false);
+            scrollPane.setVisible(false);
+            textAreaDetails.setVisible(false);
+            lblSource.setVisible(true);
+            lblLED.setVisible(false);
+            spinnerSource.setVisible(true);
+            txtFieldLED.setVisible(false);
+            btnShowResult.setVisible(true);
+            btnConnect.setVisible(true);
+            btnConnect.setLayoutX(480);
+            btnConnect.setLayoutY(151);
+            btnConnect.setText("Generate");
+            spinnerSource.setDisable(false);
+
+            // add all input LED to array LED when clicked on button ( connect ),
+            // and the size number leads equal number of power set button connect Disable when fill the array.
+            btnConnect.setOnAction(e -> {
+                // array of led is not empty their exit numbers
+                if (LED != null) {
+                    spinnerSource.setDisable(true);
+                }
+
+                // if array is empty and number input data in textFiled grater than OR equal size power
+                if (LED == null) {
+                    powerSize = spinnerSource.getValue();
+                    // size the array LED = value from spinner
+                    LED = new int[powerSize];
+                    index = 0;
+                }
+                // else add input leads to the array LED The array exists (created)
+                else {
+                    HashSet<Integer> numbers = new HashSet<>();
+                    for (int i = 0; i < LED.length; i++) {
+                        int randomNumber;
+                        do {
+                            randomNumber = (int) (Math.random() * spinnerSource.getValue()) + 1;
+                        } while (numbers.contains(randomNumber));
+                        numbers.add(randomNumber);
+                        LED[i] = randomNumber;
+                        index++;
+                        String PowerAndLed = "Power : " + index + " Led : " + randomNumber;
+                        //to print on the right text Area
+                        rightTextArea.appendText("  " + PowerAndLed + "\n");
+                    }
+                }
+                // # input data in textFiled leads = size power (spinner). and button add set Disable. array LED is full
+                if (index >= LED.length) {
+                    btnConnect.setDisable(true);
+                    new Warning("All lights have been added successfully.\n");
+                }
+
+            });
+
+            // red all data input from user ( number of source and number of leads )
+            // and call the method mainFunction from Data class to do algorithm and print result on text Area
+            btnShowResult.setOnAction(A -> {
+                // if array of leads is empty ( no input leads) and call method from Data class
+                if (LED == null || LED.length == 0) {
+                    new Warning("There are no input lights !!\n");
+                }
+                // call method from Data class
+                else {
+                    // what is the component show and handle position
+                    lblLED.setVisible(false);
+                    txtFieldLED.setVisible(false);
+                    spinnerSource.setVisible(false);
+                    lblSource.setVisible(false);
+                    btnShowResult.setVisible(false);
+                    txtFieldPath.setVisible(false);
+                    spinnerSource.setVisible(false);
+                    txtFieldLED.setVisible(false);
+                    btnConnect.setVisible(false);
+                    btnSelectFile.setVisible(false);
+                    textAreaResult.setVisible(true);
+                    textAreaResult.setLayoutY(90);
+                    textAreaResult.setLayoutX(50);
+                    textAreaResult.setPrefHeight(280);
+                    btnNext.setVisible(true);
+                    btnNext.setLayoutY(370);
+                    btnNext.setLayoutX(482);
+                    btnPrivies.setVisible(true);
+                    btnPrivies.setLayoutY(370);
+                    btnPrivies.setLayoutX(50);
+                    btnPrivies.setDisable(true);
+
+                    // action button next to iterate the number of text Filed
+                    btnNext.setOnAction(Anetx -> {
+                        count++;
+                        // textFiled details ->table
+                        if (count == 2) {
+                            textAreaResult.setVisible(false);
+                            textAreaDetails.setVisible(true);
+                            textAreaDetails.setLayoutY(90);
+                            textAreaDetails.setLayoutX(50);
+                            textAreaDetails.setPrefHeight(280);
+                            btnNext.setDisable(false);
+                            btnPrivies.setDisable(false);
+
+
+                        }
+                        // draw
+                        else if (count == 3) {
+                            textAreaResult.setVisible(false);
+                            scrollPane.setVisible(true);
+                            textAreaDetails.setVisible(false);
+                            scrollPane.setLayoutY(90);
+                            scrollPane.setLayoutX(50);
+                            scrollPane.setPrefHeight(280);
+                            scrollPane.setPrefWidth(475);
+                            btnNext.setDisable(true);
+                            btnPrivies.setDisable(false);
+
+                        }
+                    });
+                    // action button next to iterate the number of text Filed
+                    btnPrivies.setOnAction(privies -> {
+                        count--;
+                        // text Filed details -> table
+                        if (count == 2) {
+                            textAreaResult.setVisible(false);
+                            textAreaDetails.setVisible(true);
+                            textAreaDetails.setLayoutY(90);
+                            textAreaDetails.setLayoutX(50);
+                            textAreaDetails.setPrefHeight(280);
+                            btnNext.setDisable(false);
+
+                        }
+                        // text filed result
+                        else if (count == 1) {
+                            textAreaResult.setVisible(true);
+                            scrollPane.setVisible(false);
+                            textAreaDetails.setVisible(false);
+                            textAreaResult.setLayoutY(90);
+                            textAreaResult.setLayoutX(50);
+                            textAreaResult.setPrefHeight(280);
+                            btnNext.setDisable(false);
+                            btnPrivies.setDisable(true);
+
+
+                        }
+                    });
+                    // if no cell in array LED not equal zero (if number of Led  less than number of power and call method to do algorithm and print the result)
+                    if (isZeroValueFromLED(LED)) {
+                        textAreaResult.clear();
+                        textAreaDetails.clear();
+                        ArrayList<Integer> result = data.mainFunction(LED, textAreaResult, textAreaDetails);
+                        scrollPane.setContent(drawLayout(result));
+
+                    } else {
+                        new Warning("Some information is wrong");
+                    }
+                }
+            });
+        });
 
         // action when clicked on radioButton from file input
         radioButtonFromFile.setOnAction(e -> {
-            count=0;
+            count = 0;
             //The elements that appear and the elements that disappear
             LED = null;
             rightTextArea.clear();
             txtFieldPath.clear();
+            btnConnect.setDisable(true);
+
             lblLED.setVisible(false);
             txtFieldLED.setVisible(false);
             spinnerSource.setVisible(false);
@@ -549,8 +745,11 @@ public class MainView extends AnchorPane {
                                     new Warning("Please check number of Led's");
                                     return;
                                 }
-                                // all data from file is true
-                                new Warning("All lights have been added successfully.\n");
+                                // # input data in textFiled leads = size power (spinner). and button add set Disable. array LED is full
+                                if (index >= LED.length) {
+                                    btnConnect.setDisable(true);
+                                    new Warning("All lights have been added successfully.\n");
+                                }
                             }
                         }
                         // if data in file string (not numbers)
@@ -597,6 +796,9 @@ public class MainView extends AnchorPane {
                     btnPrivies.setVisible(true);
                     btnPrivies.setLayoutY(370);
                     btnPrivies.setLayoutX(50);
+                    btnNext.setDisable(false);
+                    btnPrivies.setDisable(true);
+
 
                     // action button next to iterate the number of text Filed
                     btnNext.setOnAction(Anetx -> {
@@ -608,6 +810,8 @@ public class MainView extends AnchorPane {
                             textAreaDetails.setLayoutY(90);
                             textAreaDetails.setLayoutX(50);
                             textAreaDetails.setPrefHeight(280);
+                            btnNext.setDisable(false);
+                            btnPrivies.setDisable(false);
                         }
                         // draw
                         else if (count == 3) {
@@ -617,7 +821,9 @@ public class MainView extends AnchorPane {
                             scrollPane.setLayoutY(90);
                             scrollPane.setLayoutX(50);
                             scrollPane.setPrefHeight(280);
-                            scrollPane.setPrefWidth(465);
+                            scrollPane.setPrefWidth(475);
+                            btnNext.setDisable(true);
+                            btnPrivies.setDisable(false);
 
                         }
 
@@ -632,6 +838,8 @@ public class MainView extends AnchorPane {
                             textAreaDetails.setLayoutY(90);
                             textAreaDetails.setLayoutX(50);
                             textAreaDetails.setPrefHeight(280);
+                            btnNext.setDisable(false);
+
                         }
                         // text filed result
                         else if (count == 1) {
@@ -641,6 +849,8 @@ public class MainView extends AnchorPane {
                             textAreaResult.setLayoutY(90);
                             textAreaResult.setLayoutX(50);
                             textAreaResult.setPrefHeight(280);
+                            btnNext.setDisable(false);
+                            btnPrivies.setDisable(true);
                         }
 
                     });
@@ -660,13 +870,11 @@ public class MainView extends AnchorPane {
         });
 
 
-
-
         //*******************************************************************       Add the basePane         **********************************************************************************
 
         // add all component to the Center Pane
         centerPane.getChildren().addAll(
-                imageView, radioButtonManualInput, radioButtonFromFile,
+                imageView, radioButtonManualInput, radioButtonRandom, radioButtonFromFile,
                 lblSource, spinnerSource, lblLED, txtFieldLED, btnConnect,
                 btnShowResult, btnSelectFile, txtFieldPath, scrollPane, textAreaResult,
                 textAreaDetails, btnNext, btnPrivies);
@@ -676,15 +884,14 @@ public class MainView extends AnchorPane {
     }
 
 
-
-
     /**
      * To draw an approximate diagram of the algorithm.
-     * */
+     */
     public AnchorPane drawLayout(ArrayList<Integer> ledSize) {
 
         // initialize the AnchorPane to add the scrollPane
         AnchorPane anchorPane = new AnchorPane();
+        anchorPane.setPrefWidth(475);
         // initialize the two hash table for the circle and the rectangle
         Hashtable<Integer, Circle> circleMap = new Hashtable<>();
         Hashtable<Integer, Rectangle> rectangleMap = new Hashtable<>();
@@ -707,10 +914,11 @@ public class MainView extends AnchorPane {
 
             // initialize the rectangle Indicates to power
             Rectangle rectangle = new Rectangle(80, 30);
-            rectangle.setFill(Color.GREEN);
+
             // handle position rectangle led in AnchorPane
             rectangle.setLayoutX(250);
             rectangle.setLayoutY(i * 50);
+            rectangle.setFill(Color.GREEN);
 
             // initialize the label power
             Label labelPower = new Label("Power " + i);
@@ -730,11 +938,13 @@ public class MainView extends AnchorPane {
             Circle circle = circleMap.get(Integer.parseInt(String.valueOf(ledSize.get(k))));
             Rectangle rectangle = rectangleMap.get(Integer.parseInt(String.valueOf(ledSize.get(k))));
             if (circle != null && rectangle != null) {
+
+
                 // initialize the line between circle and rectangle
                 Line line = new Line();
                 // handle position line
-                line.setStartX(circle.getLayoutX()+ circle.getRadius() / 2);
-                line.setStartY(circle.getLayoutY()+ circle.getRadius() / 2);
+                line.setStartX(circle.getLayoutX() + circle.getRadius() / 2);
+                line.setStartY(circle.getLayoutY() + circle.getRadius() / 2);
                 line.setEndX(rectangle.getLayoutX());
                 line.setEndY(rectangle.getLayoutY() + rectangle.getHeight() / 2);
                 anchorPane.getChildren().add(line);

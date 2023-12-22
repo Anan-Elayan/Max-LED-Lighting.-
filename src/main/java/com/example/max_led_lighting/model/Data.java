@@ -20,8 +20,9 @@ import java.util.Arrays;
         fourth method : In building it, we rely on the result coming from the upper ( getResult ) method until it finds the answer and print the tables to text area passing.
 
   ♦ relation of algorithm : time complexity = O(n^2)
-                           {       0                     if array is empty }
-                           { max(cost[j]+1 , cost(i))    if i > 0 j > 0 }
+                             apace = O(1)
+                           {       1                    initial value...if array is empty(no such j exists) }
+                           { max(cost[j]+1, cost[i])    if i > j > 0 and array[i] >array[j] }
 
 */
 
@@ -42,18 +43,30 @@ public class Data {
 
 
     // for this function build the algorithm
+    /** Definition of LIS:
+     Given an unsorted array of integers,
+     the Longest Increasing Subsequence is the length of the longest subsequence
+     such that all elements of the subsequence are in strictly increasing order.
+     */
     public void getResult (int [] LED ,int [] cost,int []index){
 
         if(LED.length==0){
             return;
         }
+
         // fill initial value of cast array to 1
-        Arrays.fill(cost,1);
-        // fill initial value of index array to -1
+        // is used to store the length of the longest increasing subsequence ending at each position in the LED array
+        // when it finds a longer increasing subsequence ending at the current position, it updates the cost array to reflect the new length.
+        Arrays.fill(cost,1);// can you change to 0
+
+
+        // fill initial value of index array to -1.
+        // to mark that no previous element has been found for the current element in the array.
+        // The index array is also updated to keep track of the indices of the elements that contribute to the LIS.
         Arrays.fill(index,-1);
         for (int i = 1; i < LED.length; i++) {
             for (int j = 0; j < i; j++) {
-                if(LED[i] > LED[j] && cost[i] < cost[j]+1){
+                if(LED[i] > LED[j] && cost[i] <= cost[j]+1){
                     cost[i] = cost[j]+1;
                     index[i] = j;
                 }
@@ -64,6 +77,7 @@ public class Data {
 
     // for this method return array list fill the result from algorithm,and the method take's the array of LED and cost ,index array and textArea to print result
     public ArrayList<Integer> findResult(int []LED , int[]cost ,int []index, TextArea textAreaResult){
+
         ArrayList<Integer>result = new ArrayList<>();
         int MAX = cost[0];
         int maxIndex = 0;
